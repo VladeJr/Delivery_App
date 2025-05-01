@@ -5,13 +5,15 @@ import {
   TextInput,
   TouchableOpacity,
   StyleSheet,
-  // CheckBox, 
-  Platform
 } from 'react-native';
 import { Ionicons, MaterialIcons } from '@expo/vector-icons';
-import CheckBox from '@react-native-community/checkbox';
+import { useNavigation } from '@react-navigation/native';
+import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { RootStackParamList } from '../navigation';
 
 const RegisterScreen = () => {
+  const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
+
   const [fullName, setFullName] = useState('');
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
@@ -110,12 +112,15 @@ const RegisterScreen = () => {
         </View>
       </View>
 
-      {/* Checkbox */}
+      {/* Checkbox custom */}
       <View style={styles.checkboxContainer}>
-        <CheckBox
-          value={agreeTerms}
-          onValueChange={setAgreeTerms}
-        />
+        <TouchableOpacity onPress={() => setAgreeTerms(!agreeTerms)}>
+          <Ionicons
+            name={agreeTerms ? 'checkbox' : 'square-outline'}
+            size={24}
+            color={agreeTerms ? '#ff5c45' : '#ccc'}
+          />
+        </TouchableOpacity>
         <Text style={styles.checkboxLabel}>
           Estou de acordo com os termos do aplicativo
         </Text>
@@ -127,7 +132,7 @@ const RegisterScreen = () => {
       </TouchableOpacity>
 
       {/* Link para login */}
-      <TouchableOpacity>
+      <TouchableOpacity onPress={() => navigation.navigate('Login')}>
         <Text style={styles.link}>Já possuo uma conta</Text>
       </TouchableOpacity>
     </View>
