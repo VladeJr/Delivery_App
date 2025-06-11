@@ -53,7 +53,11 @@ const LoginScreen = () => {
         <Text style={styles.link}>Esqueci minha senha</Text>
       </TouchableOpacity>
 
-      <TouchableOpacity style={styles.button}>
+      {/* Botão Entrar */}
+      <TouchableOpacity
+        style={styles.button}
+        onPress={() => navigation.replace('Main')}
+      >
         <Text style={styles.buttonText}>Entrar</Text>
       </TouchableOpacity>
 
